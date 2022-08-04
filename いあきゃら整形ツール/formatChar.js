@@ -19,8 +19,9 @@ function onRun() {
   var arrName = origName.split('(');
   if (arrName.length) {
     var mainName = arrName[0];
+    var yomiName = "";
     if (arrName.length == 2) {
-      var yomiName = arrName[1];
+      yomiName = arrName[1];
     }
   }
 
