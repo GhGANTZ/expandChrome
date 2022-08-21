@@ -1,15 +1,15 @@
 /**
- * メインメソッド
+ * キャラ駒を出力する
  */
-document.getElementById("btn").addEventListener("click", async () => {
+document.getElementById("output_Ccfolia").addEventListener("click", async () => {
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   chrome.scripting.executeScript({
     target: { tabId: tab.id },
-    function: onRun,
+    function: outputCcfolia,
   });
 });
 
-function onRun() {
+function outputCcfolia() {
   // 名前の取得
   var origName = document.getElementsByClassName("is-size-2")[0].innerHTML;
   origName = origName.replaceAll('　', ' ');
@@ -120,4 +120,67 @@ function onRun() {
     rtn = rtn + "CCB\<\=\{EDU\}\*5";
     return rtn + "\"";
   }
+}
+
+/**
+ * ステータスを出力する
+ */
+ document.getElementById("output_Status").addEventListener("click", async () => {
+  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    function: outputStatus,
+  });
+});
+
+function outputStatus() {
+  // ステータスの取得
+  var statusElm = document.getElementsByClassName("column is-12 is-min-pad")[2].getElementsByClassName('has-text-light');
+  var statusArrs = new Array();
+  var statusArr;
+  for (let i = 0; i < statusElm.length; i++) {
+    statusArr = statusElm[i].innerHTML.split(' <br data-v-36077a4a=\"\"> ');
+    statusArrs.push(statusArr);
+
+  }
+  // ステータスの出力
+  var statusTxt = "";
+  for (let i = 0; i < 11; i++) {
+    statusTxt = statusTxt + statusArrs[i][0] + "：";
+    statusTxt = statusTxt + statusArrs[i][1] + "　";
+  }
+
+  var divElm = document.createElement("div");
+  divElm.innerHTML = "\<textarea readonly style=\"width\: 50vw\; height\: 200px\; margin\: 0 auto\; display\: block\;\"\>" + statusTxt + "\<\/textarea\>";
+  document.getElementsByClassName("section")[0].before(divElm);
+}
+
+/**
+ * 技能を出力する
+ */
+ document.getElementById("output_Skill").addEventListener("click", async () => {
+  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    function: outputGinou,
+  });
+});
+
+function outputGinou() {
+  var ginouElms = document.getElementsByClassName("is-fullwidth gino-table")[0].getElementsByClassName("charedit-status-tr");
+  var ginouRow;
+  var ginouTxt = "";
+  for (let i = 0; i < ginouElms.length; i++) {
+    ginouRow = ginouElms[i];
+    if (ginouRow.children[0].getElementsByClassName("has-text-dark")[0]) {
+      ginouTxt = ginouTxt + ginouRow.children[0].innerText + "(";
+      ginouTxt = ginouTxt + ginouRow.children[0].getElementsByClassName("has-text-dark")[0].value + ")";
+    } else {
+      ginouTxt = ginouTxt + ginouRow.children[0].innerText;
+    }
+    ginouTxt = ginouTxt + "：" + ginouRow.children[1].getElementsByClassName("has-text-dark")[0].value + "　";
+  } 
+  var divElm = document.createElement("div");
+  divElm.innerHTML = "\<textarea readonly style=\"width\: 50vw\; height\: 200px\; margin\: 0 auto\; display\: block\;\"\>" + ginouTxt + "\<\/textarea\>";
+  document.getElementsByClassName("section")[0].before(divElm);
 }
