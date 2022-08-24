@@ -140,8 +140,9 @@ function outputStatus() {
   var statusArr;
   for (let i = 0; i < statusElm.length; i++) {
     statusArr = statusElm[i].innerHTML.split(' <br data-v-36077a4a=\"\"> ');
+    statusArr[0] = statusArr[0].trim();
+    statusArr[1] = statusArr[1].trim();
     statusArrs.push(statusArr);
-
   }
   // ステータスの出力
   var statusTxt = "";
@@ -149,6 +150,7 @@ function outputStatus() {
     statusTxt = statusTxt + statusArrs[i][0] + "：";
     statusTxt = statusTxt + statusArrs[i][1] + "　";
   }
+  statusTxt = statusTxt.trim();
 
   var divElm = document.createElement("div");
   divElm.innerHTML = "\<textarea readonly style=\"width\: 50vw\; height\: 200px\; margin\: 0 auto\; display\: block\;\"\>" + statusTxt + "\<\/textarea\>";
@@ -173,13 +175,14 @@ function outputGinou() {
   for (let i = 0; i < ginouElms.length; i++) {
     ginouRow = ginouElms[i];
     if (ginouRow.children[0].getElementsByClassName("has-text-dark")[0]) {
-      ginouTxt = ginouTxt + ginouRow.children[0].innerText + "(";
-      ginouTxt = ginouTxt + ginouRow.children[0].getElementsByClassName("has-text-dark")[0].value + ")";
+      ginouTxt = ginouTxt + ginouRow.children[0].innerText.trim() + "(";
+      ginouTxt = ginouTxt + ginouRow.children[0].getElementsByClassName("has-text-dark")[0].value.trim() + ")";
     } else {
-      ginouTxt = ginouTxt + ginouRow.children[0].innerText;
+      ginouTxt = ginouTxt + ginouRow.children[0].innerText.trim();
     }
-    ginouTxt = ginouTxt + "：" + ginouRow.children[1].getElementsByClassName("has-text-dark")[0].value + "　";
+    ginouTxt = ginouTxt + "：" + ginouRow.children[1].getElementsByClassName("has-text-dark")[0].value.trim() + "　";
   } 
+  ginouTxt = ginouTxt.trim();
   var divElm = document.createElement("div");
   divElm.innerHTML = "\<textarea readonly style=\"width\: 50vw\; height\: 200px\; margin\: 0 auto\; display\: block\;\"\>" + ginouTxt + "\<\/textarea\>";
   document.getElementsByClassName("section")[0].before(divElm);
