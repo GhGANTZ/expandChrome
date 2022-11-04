@@ -68,8 +68,8 @@ function outputCcfolia() {
   function createParams() {
     var rtn = "";
     for (let i = 0; i < 8; i++) {
-      rtn = rtn + "\{\"label\": \"" + statusArrs[i][0] + "\",";
-      rtn = rtn + "\"value\": \"" + statusArrs[i][1] + "\"\}";
+      rtn = rtn + "\{\"label\": \"" + statusArrs[i][0].trim() + "\",";
+      rtn = rtn + "\"value\": \"" + statusArrs[i][1].trim() + "\"\}";
       if (i != 7) {
         rtn = rtn + ",";
       }
@@ -80,9 +80,9 @@ function outputCcfolia() {
   function createStatus() {
     var rtn = "";
     for (let i = 8; i < 11; i++) {
-      rtn = rtn + "\{\"label\": \"" + statusArrs[i][0] + "\",";
-      rtn = rtn + "\"value\": \"" + statusArrs[i][1] + "\",";
-      rtn = rtn + "\"max\": \"" + statusArrs[i][1] + "\"\}";
+      rtn = rtn + "\{\"label\": \"" + statusArrs[i][0].trim() + "\",";
+      rtn = rtn + "\"value\": \"" + statusArrs[i][1].trim() + "\",";
+      rtn = rtn + "\"max\": \"" + statusArrs[i][1].trim() + "\"\}";
       if (i != 10) {
         rtn = rtn + ",";
       }
@@ -105,6 +105,8 @@ function outputCcfolia() {
       if (ginouRow.children[0].getElementsByClassName("has-text-dark")[0]) {
         rtn = rtn + ginouRow.children[0].innerText + ":";
         rtn = rtn + ginouRow.children[0].getElementsByClassName("has-text-dark")[0].value;
+      } else if (ginouRow.children[0].getElementsByClassName("ta-c")) {
+        rtn = rtn + ginouRow.children[0].getElementsByClassName("ta-c")[0].value;
       } else {
         rtn = rtn + ginouRow.children[0].innerText;
       }
@@ -177,6 +179,8 @@ function outputGinou() {
     if (ginouRow.children[0].getElementsByClassName("has-text-dark")[0]) {
       ginouTxt = ginouTxt + ginouRow.children[0].innerText.trim() + "(";
       ginouTxt = ginouTxt + ginouRow.children[0].getElementsByClassName("has-text-dark")[0].value.trim() + ")";
+    } else if (ginouRow.children[0].getElementsByClassName("ta-c")[0]) {
+      ginouTxt = ginouTxt + ginouRow.children[0].getElementsByClassName("ta-c")[0].value;
     } else {
       ginouTxt = ginouTxt + ginouRow.children[0].innerText.trim();
     }
