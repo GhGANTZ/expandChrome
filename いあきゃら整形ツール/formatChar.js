@@ -105,7 +105,7 @@ function outputCcfolia() {
       if (ginouRow.children[0].getElementsByClassName("has-text-dark")[0]) {
         rtn = rtn + ginouRow.children[0].innerText + ":";
         rtn = rtn + ginouRow.children[0].getElementsByClassName("has-text-dark")[0].value;
-      } else if (ginouRow.children[0].getElementsByClassName("ta-c")) {
+      } else if (ginouRow.children[0].getElementsByClassName("ta-c")[0]) {
         rtn = rtn + ginouRow.children[0].getElementsByClassName("ta-c")[0].value;
       } else {
         rtn = rtn + ginouRow.children[0].innerText;
