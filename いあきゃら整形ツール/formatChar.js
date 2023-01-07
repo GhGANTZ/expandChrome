@@ -30,7 +30,7 @@ function outputCcfolia() {
   var statusArrs = new Array();
   var statusArr;
   for (let i = 0; i < statusElm.length; i++) {
-    statusArr = statusElm[i].innerHTML.split(' <br data-v-36077a4a=\"\"> ');
+    statusArr = statusElm[i].innerHTML.split(' <br data-v-770263bb=\"\"> ');
     statusArrs.push(statusArr);
 
   }
@@ -141,7 +141,7 @@ function outputStatus() {
   var statusArrs = new Array();
   var statusArr;
   for (let i = 0; i < statusElm.length; i++) {
-    statusArr = statusElm[i].innerHTML.split(' <br data-v-36077a4a=\"\"> ');
+    statusArr = statusElm[i].innerHTML.split(' <br data-v-770263bb=\"\"> ');
     statusArr[0] = statusArr[0].trim();
     statusArr[1] = statusArr[1].trim();
     statusArrs.push(statusArr);
